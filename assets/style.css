@@ -11,3 +11,4 @@ ol{list-style:none;padding:0;margin:20px 0}li{display:flex;gap:12px;background:v
 .btn{display:inline-block;background:var(--ac);color:#fff;font-weight:700;padding:12px 22px;border-radius:999px;text-decoration:none;margin-top:10px}
 @media(prefers-color-scheme:dark){.btn{color:#101217}}
 .note{font-size:12.5px;color:var(--mut);margin-top:16px}a.list{color:var(--ac)}
+ul.items{list-style:disc;margin:8px 0 0;padding-left:18px;font-size:13px;color:var(--mut)}ul.items li{display:list-item;background:none;border:0;border-radius:0;padding:2px 0;margin:0}ul.items a{color:var(--ac);text-decoration:underline;text-underline-offset:2px}
