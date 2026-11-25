@@ -1,10 +1,11 @@
 // 조회수: GoatCounter(gjf-graphicnews)로 집계하고, data-views 요소에 숫자를 표시한다.
-// data-range: day(일간, 오늘 0시부터) | month(월간, 이번 달 1일부터) | all(누적). 날짜는 한국 시간 기준.
+// data-range: day(일간) | month(월간) | all(누적). GoatCounter 공개 카운터는 날짜를 UTC로만 나누므로
+// 날짜도 UTC로 잡는다(일간 = 한국 시간 오전 9시부터 다음 날 오전 9시 전까지). 한국 날짜로 잡으면 0~9시에 일간이 0으로 나온다.
 (function(){
   var C='https://gjf-graphicnews.goatcounter.com';
   var s=document.createElement('script');s.async=true;s.src='https://gc.zgo.at/count.js';s.setAttribute('data-goatcounter',C+'/count');document.head.appendChild(s);
   function ymd(d){return d.toISOString().slice(0,10);}
-  var now=new Date(Date.now()+9*3600e3), today=ymd(now), tomorrow=ymd(new Date(now.getTime()+864e5));
+  var now=new Date(), today=ymd(now), tomorrow=ymd(new Date(now.getTime()+864e5));
   var range={day:'?start='+today+'&end='+tomorrow, month:'?start='+today.slice(0,8)+'01&end='+tomorrow, all:'?start=2026-11-01&end='+tomorrow};
   function get(p,r){
     return fetch(C+'/counter/'+encodeURIComponent(p)+'.json'+(range[r]||range.all))
