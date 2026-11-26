@@ -5,7 +5,9 @@
   var C='https://gjf-graphicnews.goatcounter.com';
   var s=document.createElement('script');s.async=true;s.src='https://gc.zgo.at/count.js';s.setAttribute('data-goatcounter',C+'/count');document.head.appendChild(s);
   function ymd(d){return d.toISOString().slice(0,10);}
-  var now=new Date(), today=ymd(now), tomorrow=ymd(new Date(now.getTime()+864e5));
+  // GoatCounter는 같은 주소의 응답을 4시간 넘게 묵혀 두기도 한다. 끝 날짜를 매시간 하루씩 미래로 밀어
+  // 주소를 바꾸면(미래 날짜라 숫자는 같음) 매시간 새로 계산된 값을 받는다.
+  var now=new Date(), today=ymd(now), tomorrow=ymd(new Date(now.getTime()+(1+now.getUTCHours())*864e5));
   var range={day:'?start='+today+'&end='+tomorrow, month:'?start='+today.slice(0,8)+'01&end='+tomorrow, all:'?start=2026-11-01&end='+tomorrow};
   function get(p,r){
     return fetch(C+'/counter/'+encodeURIComponent(p)+'.json'+(range[r]||range.all))
